@@ -42,6 +42,7 @@ function LoginForm({ history }) {
         placeholder="Enter password"
       ></input>
       <br />
+
       <button type="submit">Submit</button>
       <br />
       <Link to="/signup">Don´t have an account?</Link>

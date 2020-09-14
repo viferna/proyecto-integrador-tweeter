@@ -32,6 +32,9 @@ const userSlice = createSlice({
       state.loggedIn = false;
       state.userLoginError = action.payload;
     },
+    logoutUser(state, action) {
+      state.loggedIn = false;
+    },
   },
 });
 
@@ -82,6 +85,14 @@ export const loginUser = (user, history) => {
     } catch (error) {
       dispatch(loginUserError(error.response?.data));
     }
+  };
+};
+
+export const logoutUser = (history) => {
+  return async function (dispatch) {
+    localStorage.removeItem("token");
+
+    history.push("/");
   };
 };
 

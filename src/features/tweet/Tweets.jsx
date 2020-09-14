@@ -17,12 +17,12 @@ function Tweets({ history }) {
 
     history.push("/login");
   };
+
   return (
     <div>
       <Link to="/new-tweet">New Tweet</Link>
       <button onClick={logoutUser}>Log out</button>
       <dl>
-        {" "}
         {tweets.map((tweet) => (
           <Fragment key={tweet._id}>
             <dt>
@@ -31,7 +31,7 @@ function Tweets({ history }) {
             <dd> {tweet.text}</dd>
             <hr />
           </Fragment>
-        ))}{" "}
+        ))}
       </dl>
     </div>
   );
