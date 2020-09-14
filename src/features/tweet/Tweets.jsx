@@ -5,17 +5,18 @@ import { useEffect } from "react";
 import { fetchTweets } from "./tweetSlice";
 
 function Tweets({ history }) {
-  const logoutUser = () => {
-    localStorage.removeItem("token");
-
-    history.push("/");
-  };
   const tweets = useSelector((state) => state.tweet.tweets);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTweets());
   }, [dispatch]);
+
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+
+    history.push("/login");
+  };
   return (
     <div>
       <Link to="/new-tweet">New Tweet</Link>
