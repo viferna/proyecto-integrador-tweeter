@@ -5,7 +5,8 @@ import LoginForm from "./features/user/LoginForm";
 import SignupForm from "./features/user/SignupForm";
 import Tweets from "./features/tweet/Tweets";
 import TweetForm from "./features/tweet/TweetForm";
-import { PrivateRoute } from "./features/user/PrivateRoute";
+import PrivateRoute from "./features/share/PrivateRoute";
+
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +14,7 @@ function App() {
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/signup" component={SignupForm} />
         <Route exact path="/tweets" component={Tweets} />
-        <Route exact path="/new-tweet" component={TweetForm} />
+        <PrivateRoute exact path="/new-tweet" component={TweetForm} />
         <Redirect to="/tweets" />
       </Switch>
     </BrowserRouter>

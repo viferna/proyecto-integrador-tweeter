@@ -43,13 +43,14 @@ export const {
   fetchTweetsError,
 } = tweetSlice.actions;
 
-export const sendTweet = (text) => async (dispatch) => {
+export const sendTweet = (text, history) => async (dispatch) => {
   dispatch(sendTweetStart());
   try {
     const response = await api.post("/tweets", { text });
     dispatch(sendTweetSuccess());
+    history.push("/tweets");
   } catch (error) {
-    dispatch(sendTweetError(error.response.data));
+    dispatch(sendTweetError(error.response?.data));
   }
 };
 
@@ -58,7 +59,7 @@ export const fetchTweets = () => async (dispatch) => {
     const response = await api.get("/tweets");
     dispatch(fetchTweetsSuccess(response.data));
   } catch (error) {
-    dispatch(fetchTweetsError(error.response.data));
+    dispatch(fetchTweetsError(error.response?.data));
   }
 };
 

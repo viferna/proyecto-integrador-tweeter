@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import { sendTweet } from "./tweetSlice";
 import { useDispatch, useSelector } from "react-redux";
-function TweetForm() {
+function TweetForm({ history }) {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.tweet.loading);
-
+  const error = useSelector((state) => state.tweet.sendTweetError);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendTweet(text));
+    dispatch(sendTweet(text, history));
   };
-  if (loading) {
-    return (
-      <>
-        <div style={{ margin: "15px" }}>
-          <i className="fa fa-spinner fa-spin fa-4x"></i>
-        </div>
-      </>
-    );
-  }
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>New Tweet</h1>
@@ -28,8 +20,11 @@ function TweetForm() {
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
+      {error && <div style={{ color: "red" }}>{error.message}</div>}
       <br />
-      <button type="submit">Send</button>
+      <button type="submit">
+        Send {loading && <i className="fa fa-spinner fa-spin"></i>}
+      </button>
     </form>
   );
 }
